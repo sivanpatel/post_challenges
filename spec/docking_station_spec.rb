@@ -34,17 +34,12 @@ describe DockingStation do
     expect(subject).to respond_to :capacity=
   end
 
-  it "allows capacity to be specified at initialization" do
-    random = 50
-    station = DockingStation.new(random)
-    expect(station.capacity).to eq(random)
-  end
 
   # it "should be able to set capacity" do
   #   random = 50
-  #   subject.capacity = random
+  #   set = DockingStation.new random
   #   expect(subject.capacity).to eq random
-  # end
+  # endst
 
 
 end
