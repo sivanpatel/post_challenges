@@ -6,23 +6,28 @@ describe DockingStation do
     it "should be empty by default" do
       expect {subject.release_bike}.to raise_error "No bikes available"
     end
+
+    it "should not release broken bike" do
+      bike = double :bike, working?: false
+      subject.dock bike
+      expect {subject.release_bike}.to raise_error "Can't release broken bike"
+    end
   end
 
   it "have method dock with 1 argument" do
     expect(subject).to respond_to(:dock).with(1).argument
   end
 
-  it "should return Bike class" do
-    bikes = []
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq bikes.push(bike)
-    expect(subject.release_bike).to eq bikes.pop
+  it "release the bike you docked" do
+    bike = double :bike, working?: true
+    subject.dock bike
+    expect(subject.release_bike).to be bike
   end
 
   describe '#dock' do
     it "cannot dock over capacity" do
-      subject.capacity.times { subject.dock(Bike.new) }
-      expect{subject.dock(Bike.new)}.to raise_error "It is full"
+      subject.capacity.times { subject.dock double(:bike) }
+      expect{subject.dock double(:bike)}.to raise_error "It is full"
     end
   end
 
@@ -40,6 +45,9 @@ describe DockingStation do
     set = DockingStation.new random
     expect(set.capacity).to eq random
   end
+
+
+
 
 
 end

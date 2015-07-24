@@ -10,8 +10,16 @@ class DockingStation
   end
 
   def release_bike
-    fail "No bikes available" if empty?
-    bikes.pop
+    if empty?
+      fail "No bikes available"
+    else bmx = bikes.select { |bike| bike.working? }.pop
+      if bmx.nil?
+         fail "Can't release broken bike"
+      else
+         bmx
+      end
+      bikes.delete bmx
+    end
   end
 
   def dock(bike)
