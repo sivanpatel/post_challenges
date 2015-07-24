@@ -35,11 +35,11 @@ describe DockingStation do
   end
 
 
-  # it "should be able to set capacity" do
-  #   random = 50
-  #   set = DockingStation.new random
-  #   expect(subject.capacity).to eq random
-  # endst
+  it "should be able to set capacity" do
+    random = 50
+    set = DockingStation.new random
+    expect(set.capacity).to eq random
+  end
 
 
 end
